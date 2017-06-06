@@ -16,3 +16,18 @@ avaliar filmes (ou outros trabalhos artísticos).
    * no shell do sbt, executar "run" 
    * acessar o projeto em http://localhost:9000  
  
+
+### Objetivo
+    * Mecanismo de persistência (Sistema de Arquivos, SGBD (sistema gerenciador de banco de dados))
+    * Arquitetura MVC e Desenvolvimento de Aplicações Web
+
+    -> POC (Proof of Concept)
+        ** Features implementadas
+            - cadastrar novo filme
+            - listar filmes cadastrados
+
+### TODO
+    * Features
+        -> Login (change structure of the db)
+        -> Lista de Filmes (@ if session.isLogged shows more information (evaluate)) USER SHOULD BE IN SESSION (saves in a cookie)
+        -> Computar a média das notas do filme -> SELECT Titulo AVG(Nota) FROM Filme INNER JOIN Avaliacao WHERE Filme.id = Avaliacao.FK_Filme GROUP BY Titulo
