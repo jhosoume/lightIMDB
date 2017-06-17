@@ -1,0 +1,14 @@
+@* newMovie Template File *@
+@(movieForm: Form[MovieVO])(implicit messages: Messages)
+
+@main("New movie") {
+ @helper.form(action = routes.MovieController.newMovieSubmission()) {
+  @helper.inputText(movieForm("Title"))
+  @helper.inputText(movieForm("Director"))
+  @helper.inputText(movieForm("Year"))
+
+  <div class="form-actions">
+    <button type="submit">Submit new movie</button> 
+  </div>
+ }
+}

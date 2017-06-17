@@ -1,0 +1,10 @@
+@* listagem Template File *@
+@(movies: List[Movie])
+
+@main("IMDB") {
+   <ul>
+     @for(movie <- movies) {
+       <li>@movie.title - @movie.director - @movie.productionYear</li> 
+     }
+   </ul>
+}
