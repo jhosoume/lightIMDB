@@ -25,6 +25,8 @@ class MovieController @Inject()(dao: MovieDAO, val messagesApi: MessagesApi) ext
     var movies = dao.list
     Ok(views.html.movies.listing(movies))
   }
+
+  def show(id: Long) = TODO
   
   def newMovie = Action {
     Ok(views.html.movies.newMovie(movieForm))
@@ -49,7 +51,7 @@ class MovieController @Inject()(dao: MovieDAO, val messagesApi: MessagesApi) ext
     mapping(
       "Title"  -> nonEmptyText,
       "Director" -> nonEmptyText,
-      "Year" -> number(min=1950, max=2050)
+      "Year" -> number(min=1956, max=2050)
     )(MovieVO.apply)(MovieVO.unapply)    
   )
 }
