@@ -1,0 +1,13 @@
+@* newUser Template File *@
+@(userForm: Form[UserVO])(implicit messages: Messages)
+
+@main("New user") {
+ @helper.form(action = routes.UserController.newUserSubmission()) {
+  @helper.inputText(userForm("Email"))
+  @helper.inputText(userForm("Password"))
+
+  <div class="form-actions">
+    <button type="submit">Submit new user</button> 
+  </div>
+ }
+}

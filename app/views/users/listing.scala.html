@@ -1,0 +1,10 @@
+@* listagem Template File *@
+@(users: List[User])
+
+@main("User") {
+   <ul>
+     @for(user <- users) {
+       <li>@user.email - @user.password</li> 
+     }
+   </ul>
+}
