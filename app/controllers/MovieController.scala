@@ -26,7 +26,9 @@ class MovieController @Inject()(dao: MovieDAO, val messagesApi: MessagesApi) ext
     Ok(views.html.movies.listing(movies))
   }
 
-  def show(id: Long) = TODO
+  def show(id: Int) = Action {
+    Ok(views.html.movies.single(dao.findById(id)))  
+  }
   
   def newMovie = Action {
     Ok(views.html.movies.newMovie(movieForm))
@@ -42,9 +44,8 @@ class MovieController @Inject()(dao: MovieDAO, val messagesApi: MessagesApi) ext
         dao.save(newMovie)
         var movies = dao.list
         Created(views.html.movies.listing(movies))
-    }
-  )
-    
+      }
+    )
   }
   
   val movieForm = Form(

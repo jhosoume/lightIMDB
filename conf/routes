@@ -8,12 +8,12 @@ GET     /                          controllers.HomeController.index
 
 GET     /movie                     controllers.MovieController.list
 GET		/movie/new                 controllers.MovieController.newMovie
-GET     /movie/:id                 controllers.MovieController.show(id: Long)
+GET     /movie/:id                 controllers.MovieController.show(id: Int)
 POST	/movie                     controllers.MovieController.newMovieSubmission
 
 GET     /user                      controllers.UserController.list
 GET     /user/new                  controllers.UserController.newUser
-GET     /user/:id                  controllers.UserController.show(id: Long)
+GET     /user/:id                  controllers.UserController.show(id: Int)
 POST    /user                      controllers.UserController.newUserSubmission
 
 # Map static resources from the /public folder to the /assets URL path

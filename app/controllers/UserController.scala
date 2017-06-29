@@ -13,11 +13,11 @@ import play.api.i18n.MessagesApi
 @Singleton
 class UserController @Inject()(dao: UserDAO, val messagesApi: MessagesApi) extends Controller with I18nSupport {
   
-  def login(email: String, password:String) = Action {
-    Ok("foo")
-  }
+  def login(email: String, password:String) = TODO
 
-  def show(id: Long) = TODO
+  def show(id: Int) = Action {
+    Ok(views.html.users.single(dao.findById(id)))
+  }
 
   def list = Action {
     var users = dao.list
