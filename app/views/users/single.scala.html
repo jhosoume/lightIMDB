@@ -1,10 +1,8 @@
 @* listagem Template File *@
-@(users: List[User])
+@(user: Option[User])
 
 @main("User") {
    <ul>
-     @for(user <- users) {
-       <li>@user.email - @user.password</li> 
-     }
+       <li>@user.get.email - @user.get.password</li> 
    </ul>
 }

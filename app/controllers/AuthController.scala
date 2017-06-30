@@ -71,7 +71,7 @@ trait Secured {
    * You will need to implement UserDAO.findOneByUsername
    */
   def withUser(f: User => Request[AnyContent] => Result) = withAuth { username => implicit request =>
-    dao.findOneByUsername(username).head.map { user =>
+    dao.searchByEmail(username).map { user =>
       f(user)(request)
     }.getOrElse(onUnauthorized(request))
   }

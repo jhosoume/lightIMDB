@@ -3,7 +3,8 @@ package controllers
 import javax.inject._
 import play.api._
 import play.api.mvc._
-import models.Secured
+import controllers.Secured
+import models.UserDAO
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -24,7 +25,7 @@ class HomeController @Inject()(override val dao: UserDAO) extends Controller wit
   }
 
   def user() = withUser { user => implicit request =>
-    val username = user.username
-    Ok(views.html.user(user))
+    val username = user.email
+    Ok(views.html.users.single(Option(user)))
   }
 }

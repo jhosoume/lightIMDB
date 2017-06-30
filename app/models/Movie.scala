@@ -38,9 +38,12 @@ class MovieDAO @Inject() (database: Database){
     SQL"SELECT ID, TITLE, DIRECTOR, PRODUCTION_YEAR AS productionYear FROM TB_MOVIE".as(parser.*)
   }
 
-   def findById(id: Int) = database.withConnection { implicit connection =>
-    SQL("""SELECT ID, TITLE, DIRECTOR, PRODUCTION_YEAR AS productionYear FROM TB_MOVIE WHERE ID = {id} LIMIT 1""")
-    .on('id -> id).as(parser.*)
+   def findById(id: Int): Option[Movie] = database.withConnection { 
+    implicit connection =>
+    SQL("""SELECT ID, TITLE, DIRECTOR, PRODUCTION_YEAR AS productionYear 
+           FROM TB_MOVIE 
+           WHERE ID = {id} LIMIT 1""")
+    .on('id -> id).as(parser.singleOpt)
   }
 
   //def searchByRating(rate: Int) = database.withConnection { implicit connection =>
