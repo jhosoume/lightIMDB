@@ -42,6 +42,7 @@ class UserDAO @Inject() (database: Database) {
     .on('email -> email).as(parser.*)
   }
 
-
-  //def searchByEmail(email : String) = products.filter(u => u.email == email).toList(0)  
+  def findOneByUsername(username: String) = database.withConnection { implicit connection =>
+    SQL("""SELECT * FROM TB_USER LIMIT 1""").as(parser.*)
+  }
 }
