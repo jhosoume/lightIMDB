@@ -1,13 +1,23 @@
 @* Login Template File *@
+
 @(loginForm: Form[(String, String)])(implicit messages: Messages, flahs: Flash)
 
 @main("Login") {
- @helper.form(action = routes.AuthController.authenticate) {
-  @helper.inputText(loginForm("email"))
-  @helper.inputText(loginForm("password"))
+@helper.form(action = routes.AuthController.authenticate) {
 
-  <div class="form-actions">
-    <button type="submit">login</button> 
+
+
+<div class="login-page">
+  <div class="form">
+    <form class="login-form">
+    <h4 class="message">Sign in</h4><br/>
+    	@helper.inputText(loginForm("Email"))
+		@helper.inputText(loginForm("Password"))
+      <button>login</button>
+    </form>
   </div>
+</div>
+
+  
  }
 }

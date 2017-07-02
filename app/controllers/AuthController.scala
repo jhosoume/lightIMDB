@@ -24,8 +24,8 @@ class AuthController @Inject()(val messagesApi: MessagesApi) extends Controller 
   
   val loginForm = Form(
     tuple(
-      "email" -> text,
-      "password" -> text
+      "Email" -> text,
+      "Password" -> text
     ) verifying ("Invalid email or password", result => result match {
       case (email, password) => check(email, password)
     })

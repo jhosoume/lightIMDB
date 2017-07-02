@@ -5,6 +5,8 @@
 
 # An example controller showing a sample home page
 GET     /                          controllers.HomeController.index
+GET     /home                      controllers.HomeController.index
+
 
 GET     /movie                     controllers.MovieController.list
 GET		/movie/new                 controllers.MovieController.newMovie
