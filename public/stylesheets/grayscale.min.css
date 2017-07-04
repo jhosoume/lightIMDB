@@ -32,6 +32,13 @@
   margin: auto;
 
 }
+.login-page-movie {
+
+  width: 1200px;
+  padding: 10% 0 0;
+
+
+}
 .form {
   position: relative;
   z-index: 1;
@@ -39,10 +46,22 @@
   max-width: 360px;
   margin: 0 auto 100px;
   padding: 45px;
-  text-align: center;
+  text-align: left;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 
 }
+.form-movie {
+  position: relative;
+  z-index: 1;
+  background: #000000;
+  max-width: 400px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: left;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+
+}
+
 .form input {
   font-family: "Roboto", sans-serif;
   outline: 0;
@@ -55,6 +74,20 @@
   box-sizing: border-box;
   font-size: 14px;
 }
+
+
+.form-movie input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  color: #000000;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
 .form button {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
@@ -69,7 +102,26 @@
   transition: all 0.3 ease;
   cursor: pointer;
 }
+
+.form-movie button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 100%;
+  border: 0;  
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
 .form button:hover,.form button:active,.form button:focus {
+  background: #43A047;
+}
+
+.form-movie button:hover,.form button:active,.form button:focus {
   background: #43A047;
 }
 .form .message {
@@ -271,16 +323,16 @@ ul#myTab {
   right: 0;
 }
 .w3l-movie-text h6 a {
-    font-size: 1.4em;
-    color: #222;
+    font-size: 1em;
+    padding: 0;
 }
 .w3l-movie-text {
-      margin: 0.7em 0;
+      margin: 0.8em 0;
 }
 .mid-2 p {
-       float: left;
-    font-size: 1em;
-    color: #333;
+    float: left;
+    font-size: 0.8em;
+    color: #42DCA3;
     line-height: 22px;
 }
 .block-stars {

@@ -3,12 +3,25 @@
 
 @main("New movie") {
  @helper.form(action = routes.MovieController.newMovieSubmission()) {
-  @helper.inputText(movieForm("Title"))
-  @helper.inputText(movieForm("Director"))
-  @helper.inputText(movieForm("Year"))
+
+
+    
 
   <div class="form-actions">
-    <button type="submit">Submit new movie</button> 
+	 <div class="login-page-movie">
+	  <div class="form-movie">
+	  <h4 class="message">New Movie</h4><br/>
+	    <form class="register-form">
+			  @helper.inputText(movieForm("Title"))
+			  @helper.inputText(movieForm("Director"))
+			  @helper.inputText(movieForm("Year"))
+			  <input type="file" name="Picture">
+	      <button>Send</button>
+	    </form>
+	  </div>
+	</div>
+
+
   </div>
  }
 }

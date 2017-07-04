@@ -13,6 +13,9 @@ GET		/movie/new                 controllers.MovieController.newMovie
 GET     /movie/:id                 controllers.MovieController.show(id: Int)
 POST	/movie                     controllers.MovieController.newMovieSubmission
 
+
+
+
 GET     /user                      controllers.UserController.list
 GET     /user/new                  controllers.UserController.newUser
 GET     /user/:id                  controllers.UserController.show(id: Int)
