@@ -251,6 +251,8 @@ ul#myTab {
     color: #fff;
 }
 .w3l-movie-gride-agile:hover .w3l-action-icon  {
+
+
     display: block;
     position: absolute;
     top: 37%;
@@ -258,8 +260,11 @@ ul#myTab {
       -webkit-transition: all 0.3s ease-in-out 0s;
     -o-transition: all 0.3s ease-in-out 0s;
     transition: all 0.3s ease-in-out 0s;
+
+
 }
 .w3l-movie-gride-agile{
+  
   position:relative;
 }
 .w3l-action-icon{
