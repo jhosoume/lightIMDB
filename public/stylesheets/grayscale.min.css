@@ -85,6 +85,10 @@
   color: #000;
 
 }
+.form-movie-comment1{
+  color: #000;
+
+}
 
 
 .form-movie-comment input {
@@ -410,6 +414,13 @@ ul.ratings li i ,.ratings a i{
     box-shadow: 1px 1px 100px rgba(255, 255, 255, 0.35);
     position: relative;
     padding: 10px;
+  }
+  .movie-gride-agile2 {
+    text-align: left;
+    box-shadow: 1px 1px 100px rgba(255, 255, 255, 0.35);
+    position: relative;
+    padding: 10px;
+    background: #fff;
   }
 
 
