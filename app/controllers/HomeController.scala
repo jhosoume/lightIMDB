@@ -11,7 +11,7 @@ import models.UserDAO
  * application's home page.
  */
 @Singleton
-class HomeController @Inject()(override val dao: UserDAO) extends Controller with Secured {
+class HomeController @Inject() extends Controller {
 
   /**
    * Create an Action to render an HTML page.
@@ -20,12 +20,7 @@ class HomeController @Inject()(override val dao: UserDAO) extends Controller wit
    * will be called when the application receives a `GET` request with
    * a path of `/`.
    */
-  def index = withAuth { username => implicit request =>
-    Ok(views.html.index(username))
-  }
-
-  def user() = withUser { user => implicit request =>
-    val username = user.email
-    Ok(views.html.users.single(Option(user)))
+  def index = Action { 
+    Ok(views.html.index())
   }
 }

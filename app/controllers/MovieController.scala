@@ -3,12 +3,14 @@ package controllers
 import play.api.mvc._
 import models.Movie
 import models.MovieDAO
+import models.UserDAO
 import javax.inject.Inject
 import play.api.data._
 import play.api.data.Forms._
 import javax.inject.Singleton
 import play.api.i18n.I18nSupport
 import play.api.i18n.MessagesApi
+import controllers.Secured
 
 /**
  * A classe que processa as requisicoes do usuario 
@@ -19,18 +21,18 @@ import play.api.i18n.MessagesApi
  * PlayFramework para ter acesso ao DAO FilmeDAO.  
  */
 @Singleton
-class MovieController @Inject()(dao: MovieDAO, val messagesApi: MessagesApi) extends Controller with I18nSupport {
+class MovieController @Inject()(override val dao: UserDAO, mdao: MovieDAO, val messagesApi: MessagesApi) extends Controller with Secured with I18nSupport {
   
   def list = Action {
-    var movies = dao.list
+    var movies = mdao.list
     Ok(views.html.movies.listing(movies))
   }
 
-  def show(id: Int) = Action {
-    Ok(views.html.movies.single(dao.findById(id)))  
+  def show(id: Int) = withAuth { username => implicit request =>
+    Ok(views.html.movies.single(mdao.findById(id)))  
   }
   
-  def newMovie = Action {
+  def newMovie = withAuth { username => implicit request =>
     Ok(views.html.movies.newMovie(movieForm))
   }
   
@@ -41,11 +43,16 @@ class MovieController @Inject()(dao: MovieDAO, val messagesApi: MessagesApi) ext
       },
       movie => {
         val newMovie = Movie(0, movie.title, movie.director, movie.year)
-        dao.save(newMovie)
-        var movies = dao.list
+        mdao.save(newMovie)
+        var movies = mdao.list
         Created(views.html.movies.listing(movies))
       }
     )
+  }
+
+  def user() = withUser { user => implicit request =>
+    val username = user.email
+    Ok(views.html.index(username))
   }
   
   val movieForm = Form(
@@ -55,6 +62,7 @@ class MovieController @Inject()(dao: MovieDAO, val messagesApi: MessagesApi) ext
       "Year" -> number(min=1956, max=2050)
     )(MovieVO.apply)(MovieVO.unapply)    
   )
+
 }
 
 case class MovieVO(title: String, director: String, year: Int)
