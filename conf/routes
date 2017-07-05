@@ -9,6 +9,7 @@ GET     /home                      controllers.HomeController.index
 
 
 GET     /movie                     controllers.MovieController.list
+GET     /movie/list                controllers.MovieController.listAdm
 GET		/movie/new                 controllers.MovieController.newMovie
 GET     /movie/:id                 controllers.MovieController.show(id: Int)
 POST	/movie                     controllers.MovieController.newMovieSubmission
@@ -23,7 +24,7 @@ POST    /user                      controllers.UserController.newUserSubmission
 
 GET     /login                     controllers.AuthController.login
 POST    /login                     controllers.AuthController.authenticate
-POST    /logout                    controllers.AuthController.logout
+GET     /logout                    controllers.AuthController.logout
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

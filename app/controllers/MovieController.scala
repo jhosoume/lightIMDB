@@ -28,6 +28,11 @@ class MovieController @Inject()(override val dao: UserDAO, mdao: MovieDAO, val m
     Ok(views.html.movies.listing(movies))
   }
 
+  def listAdm = Action {
+    var movies = mdao.list
+    Ok(views.html.movies.listingAdm(movies))
+  }
+
   def show(id: Int) = withAuth { username => implicit request =>
     Ok(views.html.movies.single(mdao.findById(id)))  
   }
@@ -45,7 +50,7 @@ class MovieController @Inject()(override val dao: UserDAO, mdao: MovieDAO, val m
         val newMovie = Movie(0, movie.title, movie.director, movie.year)
         mdao.save(newMovie)
         var movies = mdao.list
-        Created(views.html.movies.listing(movies))
+        Created(views.html.movies.listingAdm(movies))
       }
     )
   }

@@ -1,0 +1,65 @@
+@* listagem Template File *@
+@(movies: List[Movie])
+
+@main("IMDB") {
+
+<!-- general -->
+<div id="main" class="container">
+	<div class="intro2">
+		<div class= "form-movie-comment1 movie-gride-agile2">
+			     <div id="top" class="row">
+				    <div class="col-md-3">
+				    	<h2>Movies List</h2>
+				    </div>
+				    <div class="col-md-5">
+				        <a href="/movie/new" class="btn btn-primary pull-right h2">Novo Item</a>
+				    </div>
+			     </div> <!-- /#top -->
+     
+    <div id="list" class="row">
+
+
+	      <div class="table-responsive col-md-12">
+
+	     	<table class="table table-striped" cellspacing="0" cellpadding="0">
+	            <thead>
+	                <tr>
+	                    <th>ID</th>
+	                    <th>title</th>
+	                    <th>director</th>
+	                    <th>year</th>
+	                    <th class="actions">Ações</th>
+	                 </tr>
+	            </thead>
+
+	            <tbody>
+	            @for(movie <- movies) {	
+	                <tr>
+	                    <td>@movie.id</td>
+	                    <td>@movie.title</td>
+	                    <td>@movie.director</td>
+	                    <td>@movie.productionYear</td>
+	                    <td class="actions">
+	                        <a class="btn btn-success btn-xs" href="/movie/@movie.id">Visualizar</a>
+	                        <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
+	                    </td>
+	                </tr>
+	                }
+	 
+	            </tbody>
+	         </table>
+	     </div>
+
+     </div> <!-- /#list -->
+     	</div>
+    </div>
+ </div>  <!-- /#main -->
+<!-- //general -->
+
+
+
+
+
+
+
+}

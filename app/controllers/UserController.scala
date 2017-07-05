@@ -19,7 +19,7 @@ class UserController @Inject()(dao: UserDAO, val messagesApi: MessagesApi) exten
 
   def list = Action {
     var users = dao.list
-    Ok(views.html.users.listing(users))
+    Ok(views.html.users.listingAdm(users))
   }
 
   def newUser = Action {
@@ -35,7 +35,7 @@ class UserController @Inject()(dao: UserDAO, val messagesApi: MessagesApi) exten
         val newUser = User(0, user.email, user.password, false)
         dao.save(newUser)
         var users = dao.list
-        Created(views.html.users.listing(users))
+        Created(views.html.users.listingAdm(users))
       }
   )}
 
