@@ -52,7 +52,7 @@ class MovieController @Inject()(override val dao: UserDAO, mdao: MovieDAO, val m
 
   def user() = withUser { user => implicit request =>
     val username = user.email
-    Ok(views.html.index(username))
+    Ok(views.html.index())
   }
   
   val movieForm = Form(
