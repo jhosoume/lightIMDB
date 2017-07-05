@@ -13,8 +13,6 @@ import play.api.i18n.MessagesApi
 @Singleton
 class UserController @Inject()(dao: UserDAO, val messagesApi: MessagesApi) extends Controller with I18nSupport {
   
-  def login(email: String, password:String) = TODO
-
   def show(id: Int) = Action {
     Ok(views.html.users.single(dao.findById(id)))
   }
@@ -43,10 +41,17 @@ class UserController @Inject()(dao: UserDAO, val messagesApi: MessagesApi) exten
 
   val userForm = Form(
     mapping(
-      "Email" -> nonEmptyText,
-      "Password" -> nonEmptyText
-    )(UserVO.apply)(UserVO.unapply)
+      "Email" -> nonEmptyText(minLength = 7, maxLength = 25),
+      "Password" -> nonEmptyText(minLength = 4, maxLength = 16)
+    )(UserVO.apply)(UserVO.unapply) verifying ("Invalid email or password",
+        user => user match {
+          case UserVO(_,_) => validate(user.email)
+    })
   )
+
+  def validate(email: String) = {
+    """(\w+)@([\w\.]+)""".r.unapplySeq(email).isDefined
+  }
 }
 
 case class UserVO(email: String, password: String)

@@ -20,20 +20,22 @@ import models.UserDAO
  * application's home page.
  */
 @Singleton
-class AuthController @Inject()(val messagesApi: MessagesApi) extends Controller with I18nSupport {
+class AuthController @Inject()(dao: UserDAO, val messagesApi: MessagesApi) extends Controller with I18nSupport {
   
   val loginForm = Form(
     tuple(
-      "Email" -> text,
-      "Password" -> text
+      "Email" -> nonEmptyText,
+      "Password" -> nonEmptyText
     ) verifying ("Invalid email or password", result => result match {
       case (email, password) => check(email, password)
     })
   )
 
   def check(email: String, password: String) = {
-    (email == "admin@admin" && password == "1234")
+    val user = dao.searchByEmail(email)
+    (user.isDefined && user.get.password == password)
   }
+
 
   def login = Action { implicit request =>
     Ok(views.html.login(loginForm))
