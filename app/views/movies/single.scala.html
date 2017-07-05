@@ -2,29 +2,40 @@
 @(movie: Option[Movie])
 
 @main("IMDB") {
-   <ul>
-       <li>@movie.get.title - @movie.get.director - @movie.get.productionYear</li> 
-   </ul>
+
+
 
 
 <div class="container">
-					<div class="song-grid-right">
-						<div>
+
+						<div class= "col-sm-4 w3l-movie-gride-agile">
+								<h1><a>@movie.get.title<a>(@movie.get.productionYear)</a></a></h1>
+								<h5><a>@movie.get.director</a></h5>	
 								<a href= "/movie/@movie.get.id" class="hvr-shutter-out-horizontal"><img src="../assets/images/imgf/m15.jpg" title="album-name" class="img-responsive" alt=" " />
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-								</a>
-									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
 								</a>
 								<div class="mid-1 agileits_w3layouts_mid_1_home">
-									<div class="w3l-movie-text">
-									<h7><a>Movie:</a></h7>
-									<h6><a>@movie.get.title</a></h6>
-									<h7><a>Director:</a></h7>
-									<h6><a>@movie.get.director</a></h6>							
+									<div class="w3l-movie-text">						
 									</div>
 									<div class="mid1-2 agile_mid_2_home"> 	
-										<p>@movie.get.productionYear</p>
-										<div class="block-stars1">
+										<div class="clearfix"></div>
+									</div>
+								</div>
+						</div>
+
+
+
+					<div class="col-sm-6 w3l-movie-gride-agile">
+						<div class="all-comments-info">
+							<h1><a  href="#">Comments</a></h1>
+							<div class="agile-info-wthree-box">
+
+
+
+								<form>
+									<textarea placeholder="Message" required=""></textarea>
+									<input type="submit" value="SEND">
+
+										<div class="block-stars">
 											<ul class="w3l-ratings">
 												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
 												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
@@ -33,22 +44,12 @@
 												<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
 											</ul>
 										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-						</div>
-					</div>
-					<div class="clearfix"> </div>
-
-					<div class="all-comments">
-						<div class="all-comments-info">
-							<a  href="#">Comments</a>
-							<div class="agile-info-wthree-box">
-								<form>
-									<textarea placeholder="Message" required=""></textarea>
-									<input type="submit" value="SEND">
 									<div class="clearfix"> </div>
 								</form>
+
+
+
+
 							</div>
 						</div>
 						<div class="media-grids">
@@ -69,18 +70,6 @@
 						</div>
 					</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
