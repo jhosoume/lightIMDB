@@ -6,8 +6,9 @@
   <div class="form-actions">
 	 <div class="login-page-movie ">
 	  <div class="form-movie ">
-	  <h4 class="message">New Rating</h4><br/>
+	  <a href=><img src="../assets/images/error.png" class="img-responsive error-message"/></a>
 	    <form class="register-form">
+	  <h4 class="message">New Rating</h4><br/>
 			  @helper.inputText(ratingForm("Stars"))
 	      <button>Send</button>
 	    </form>
@@ -16,8 +17,3 @@
   </div>
  }
 }
-		<div>
-			@helper.form(action = routes.RatingController.newRatingSubmission()) {
-		    @helper.inputText(ratingForm("Stars"))
-	      	<button>Send</button>}
-	     </div>

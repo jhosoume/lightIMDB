@@ -51,7 +51,7 @@ class RatingController @Inject()(override val dao: UserDAO, moviedao: MovieDAO, 
         val avgRating = ratingdao.avgByMovie(movie_id)
         val comments = commentdao.findByMovie(movie_id)
         ratingdao.save(newRating)
-        Created(views.html.movies.single((moviedao.findById(movie_id)), commentForm, ratingForm, comments, avgRating)).withCookies(Cookie("movie", s"$movie_id"))
+        Ok(views.html.movies.single((moviedao.findById(movie_id)), commentForm, ratingForm, comments, avgRating)).withCookies(Cookie("movie", s"$movie_id"))
       }
     )
   }
@@ -63,7 +63,7 @@ class RatingController @Inject()(override val dao: UserDAO, moviedao: MovieDAO, 
   
   val ratingForm = Form(
     mapping(
-      "Stars"  -> number
+      "Stars"  -> number(min = 0, max = 5)
     )(RatingVO.apply)(RatingVO.unapply)    
   )
 

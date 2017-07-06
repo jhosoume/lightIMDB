@@ -12,6 +12,7 @@ GET     /movie/list                controllers.MovieController.listAdm
 GET		/movie/new                 controllers.MovieController.newMovie
 GET     /movie/:id                 controllers.MovieController.show(id: Int)
 POST	/movie                     controllers.MovieController.newMovieSubmission
+GET	/movie/delete/:id		   controllers.MovieController.delete(id: Int)
 
 GET     /user                      controllers.UserController.list
 GET     /user/new                  controllers.UserController.newUser

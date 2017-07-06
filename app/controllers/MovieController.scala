@@ -47,6 +47,13 @@ class MovieController @Inject()(override val dao: UserDAO, mdao: MovieDAO, ratin
   def newMovie = withAuth { username => implicit request =>
     Ok(views.html.movies.newMovie(movieForm))
   }
+
+  def delete(id: Int) = Action {implicit request =>
+    println("uhuuuuhsauhsa")
+    mdao.delete(id)
+    var movies = mdao.list
+    Ok(views.html.movies.listingAdm(movies))
+  }
   
   def newMovieSubmission = Action { implicit request =>
     movieForm.bindFromRequest.fold(

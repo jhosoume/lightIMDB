@@ -46,6 +46,12 @@ class MovieDAO @Inject() (database: Database){
     .on('id -> id).as(parser.singleOpt)
   }
 
+  def delete(id: Int) = database.withConnection { implicit connection =>
+    SQL("""DELETE FROM TB_MOVIE
+           WHERE ID = {id}""")
+    .on('id -> id)
+  }
+
   //def searchByRating(rate: Int) = database.withConnection { implicit connection =>
     //SQL("""SELECT * FROM TB_MOVIE
            //WHERE EMAIL = {email} LIMIT 1""")

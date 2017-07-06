@@ -1093,3 +1093,7 @@ width:100%;
   color: #4CAF50;
   text-align: center;
 }
+
+.error-message{
+  width: 100%;
+}
