@@ -14,9 +14,7 @@
 }
 .img-pad{
   padding: 10px;
-  background: #c4c4c4;
-
-}
+  }
  .intro1 {
   display: table;
   width: 100%;
@@ -54,7 +52,7 @@
 }
 .login-page-movie {
 
-  width: 1200px;
+
   padding: 10% 0 0;
 
 
@@ -81,22 +79,36 @@
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 
 }
+
+
 .form-movie-comment{
+  text-align: left;
+
+
+
+}
+
+
+.form-movie-comment input[type="text"], .form-movie-comment textarea {
+  font-family: "Roboto", sans-serif;
+  text-align: left;
+  outline: 0;
+  background: #fff;
+  width: 100%;
+  height: 50px;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
   color: #000;
 
 }
-.form-movie-comment1{
-  color: #000;
-
-}
-
-
-.form-movie-comment input {
+.form-movie-comment button {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #4CAF50;
-  width: 15%;
+  background: #4CAF50;  
+  width: 25%;
   border: 0;  
   padding: 15px;
   color: #FFFFFF;
@@ -421,6 +433,8 @@ ul.ratings li i ,.ratings a i{
     position: relative;
     padding: 10px;
     background: #fff;
+    color: #000;
+
   }
 
 
@@ -1039,3 +1053,13 @@ width:100%;
 }
 
 /*star rating/ comment */
+
+.star{
+  display: inline;
+  width: 20%;
+}
+
+.text-rating{
+  color: #4CAF50;
+  text-align: center;
+}
