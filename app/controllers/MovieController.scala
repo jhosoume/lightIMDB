@@ -78,7 +78,7 @@ class MovieController @Inject()(override val dao: UserDAO, mdao: MovieDAO, val m
 
   val ratingForm = Form(
     mapping(
-      "Rating"  -> number(min = 0, max = 5)
+      "Stars"  -> number
     )(RatingVO.apply)(RatingVO.unapply)
   )
 
