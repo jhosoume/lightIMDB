@@ -1,5 +1,5 @@
 @* listagem Template File *@
-@(movie: Option[Movie], commentForm: Form[CommentVO]))
+@(comment: Option[Comment])
 
 @main("IMDB") {
 
@@ -12,14 +12,11 @@
 
 
 						<p> </p>
-						<h1><a>@movie.get.title<a>(@movie.get.productionYear)</a></a></h1>
-						<h5><a>@movie.get.director</a></h5>	
 
 
 
 							<div>	
 								<div class=" img-pad col-sm-4">
-									<a href= "/movie/@movie.get.id" class="hvr-shutter-out-horizontal"><img src="../assets/images/imgf/m15.jpg" title="album-name" class="img-responsive" alt=" " />
 									</a>
 								</div>
 

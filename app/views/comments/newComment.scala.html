@@ -1,0 +1,19 @@
+@* newMovie Template File *@
+@(commentForm: Form[CommentVO])(implicit messages: Messages)
+
+@main("New movie") {
+ @helper.form(action = routes.CommentController.newCommentSubmission()) {
+  <div class="form-actions">
+	 <div class="login-page-movie ">
+	  <div class="form-movie ">
+	  <h4 class="message">New Comment</h4><br/>
+	    <form class="register-form">
+			  @helper.inputText(commentForm("Message"))
+			  <input type="file" name="Picture">
+	      <button>Send</button>
+	    </form>
+	  </div>
+	</div>
+  </div>
+ }
+}
