@@ -12,6 +12,7 @@ import play.api.i18n.I18nSupport
 import play.api.i18n.MessagesApi
 import controllers.Secured
 import controllers.CommentVO
+import controllers.RatingVO
 
 /**
  * A classe que processa as requisicoes do usuario 
@@ -36,7 +37,7 @@ class MovieController @Inject()(override val dao: UserDAO, mdao: MovieDAO, val m
 
   def show(id: Int) = withAuth { username => implicit request =>
     println(request.session.get(Security.username))
-    Ok(views.html.movies.single((mdao.findById(id)), commentForm)).withCookies(Cookie("movie", s"$id"))
+    Ok(views.html.movies.single((mdao.findById(id)), commentForm, ratingForm)).withCookies(Cookie("movie", s"$id"))
   }
   
   def newMovie = withAuth { username => implicit request =>
@@ -74,6 +75,13 @@ class MovieController @Inject()(override val dao: UserDAO, mdao: MovieDAO, val m
        "Message"  -> nonEmptyText
      )(CommentVO.apply)(CommentVO.unapply)
    )
+
+  val ratingForm = Form(
+    mapping(
+      "Rating"  -> number(min = 0, max = 5)
+    )(RatingVO.apply)(RatingVO.unapply)
+  )
+
 }
 
 case class MovieVO(title: String, director: String, year: Int)

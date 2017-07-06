@@ -1,0 +1,19 @@
+@* newMovie Template File *@
+@(ratingForm: Form[RatingVO])(implicit messages: Messages)
+
+@main("New movie") {
+ @helper.form(action = routes.RatingController.newRatingSubmission()) {
+  <div class="form-actions">
+	 <div class="login-page-movie ">
+	  <div class="form-movie ">
+	  <h4 class="message">New Rating</h4><br/>
+	    <form class="register-form">
+			  @helper.inputText(ratingForm("Stars"))
+			  <input type="file" name="Picture">
+	      <button>Send</button>
+	    </form>
+	  </div>
+	</div>
+  </div>
+ }
+}

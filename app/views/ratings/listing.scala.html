@@ -1,0 +1,49 @@
+@* listagem Template File *@
+@(ratings: List[Rating])
+
+@main("IMDB") {
+
+
+
+<!-- general -->
+	<div class="general">
+		
+		<div class="container">
+		<h4 class="latest-text latest_text">Featured Movies</h4>
+			<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+				<ul id="myTab" class="nav nav-tabs" role="tablist">
+
+				</ul>
+				<div id="myTabContent" class="tab-content">
+					<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+						
+							@for(rating <- ratings){
+							<div class="col-md-2 movie-gride-agile">
+								</a>
+								<div class="mid-1 agileits_w3layouts_mid_1_home">
+									<div class="movie-text">
+										<h7><a>Movie:</a></h7>
+										<h7><a>Director:</a></h7>
+									</div>
+									<div class="mid-2 agile_mid_2_home"> 	
+	
+										<div class="clearfix"></div>
+									</div>
+								</div>
+							</div>
+					</div>
+							}
+							
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- //general -->
+
+
+
+
+
+
+
+}

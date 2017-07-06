@@ -4,8 +4,8 @@ import play.api.mvc._
 import models.Movie
 import models.MovieDAO
 import models.UserDAO
-import models.Comment
-import models.CommentDAO
+import models.Rating
+import models.RatingDAO
 import javax.inject.Inject
 import play.api.data._
 import play.api.data.Forms._
@@ -23,31 +23,31 @@ import controllers.Secured
  * PlayFramework para ter acesso ao DAO FilmeDAO.  
  */
 @Singleton
-class CommentController @Inject()(override val dao: UserDAO, moviedao: MovieDAO,commentdao: CommentDAO, val messagesApi: MessagesApi) extends Controller with Secured with I18nSupport {
+class RatingController @Inject()(override val dao: UserDAO, moviedao: MovieDAO, ratingdao: RatingDAO, val messagesApi: MessagesApi) extends Controller with Secured with I18nSupport {
   
   def list = Action {
-    Ok(views.html.comments.listing(commentdao.list))
+    Ok(views.html.ratings.listing(ratingdao.list))
   }
 
   def show(id: Int) = withAuth { username => implicit request =>
-    Ok(views.html.comments.single(commentdao.findById(id)))
+    Ok(views.html.ratings.single(ratingdao.findById(id)))
   }
   
-  def newComment = withAuth { username => implicit request =>
-    Ok(views.html.comments.newComment(commentForm))
+  def newRating = withAuth { username => implicit request =>
+    Ok(views.html.ratings.newRating(ratingForm))
   }
   
-  def newCommentSubmission = Action { implicit request =>
-    commentForm.bindFromRequest.fold(
+  def newRatingSubmission = Action { implicit request =>
+    ratingForm.bindFromRequest.fold(
       formWithErrors => {
-        BadRequest(views.html.comments.newComment(formWithErrors))
+        BadRequest(views.html.ratings.newRating(formWithErrors))
       },
-      comment => {
+      rating => {
         val user_email = request.session.get(Security.username).get
         val user = dao.searchByEmail(user_email).get
         val movie_id =  request.cookies.get("movie").get.value.toInt
-        val newComment = Comment(0, comment.message, user.id, movie_id)
-        commentdao.save(newComment)
+        val newRating = Rating(0, rating.stars, user.id, movie_id)
+        ratingdao.save(newRating)
         Created(views.html.movies.single((moviedao.findById(movie_id)), commentForm, ratingForm)).withCookies(Cookie("movie", s"$movie_id"))
       }
     )
@@ -58,20 +58,17 @@ class CommentController @Inject()(override val dao: UserDAO, moviedao: MovieDAO,
     Ok(views.html.index())
   }
   
-  val commentForm = Form(
-    mapping(
-      "Message"  -> nonEmptyText
-    )(CommentVO.apply)(CommentVO.unapply)    
-  )
-
   val ratingForm = Form(
     mapping(
       "Rating"  -> number(min = 0, max = 5)
-    )(RatingVO.apply)(RatingVO.unapply)
+    )(RatingVO.apply)(RatingVO.unapply)    
   )
 
-
-
+  val commentForm = Form(
+    mapping(
+      "Message"  -> nonEmptyText
+    )(CommentVO.apply)(CommentVO.unapply)
+  )
 }
 
-case class CommentVO(message: String)
+case class RatingVO(stars: Int)
