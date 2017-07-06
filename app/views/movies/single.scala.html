@@ -20,8 +20,12 @@
 
 							<div>	
 								<div class=" img-pad col-sm-4">
-									<a href= "/movie/@movie.get.id" class="hvr-shutter-out-horizontal"><img src="../assets/images/imgf/m15.jpg" title="album-name" class="img-responsive" alt=" " />
+									<a href= "/movie/@movie.get.id" class="hvr-shutter-out-horizontal"><img src="../assets/images/imgf/(@movie.get.id).jpg" title="album-name" class="img-responsive" alt=" " />
 									</a>
+									<div>
+										<h1 class="text-rating">5</h1>
+										<a href=><img src="../assets/images/star.png" class="img-responsive star"/></a>
+									</div>
 								</div>
 
 								<div class="col-sm-8 media-grids">
@@ -33,61 +37,24 @@
 											<span>View all posts by :<a href="#"> Admin </a></span>
 										</div>
 									</div>
+
+									@helper.form(action = routes.CommentController.newCommentSubmission()) {
+									<div class="all-comments-info">
+										<div class="form-movie-comment">
+											<form>
+												@helper.inputText(field = commentForm("Message"))
+												<button>Send</button>
+												<div class="clearfix"> </div>
+											</form>
+										</div>
+									</div>
+								}
+
+
 								</div>
 
 							</div>
 
-
-								<div class="all-comments-info">
-										
-									<div class="agile-info-wthree-box">
-
-										<form class="form-movie-comment">
-											<textarea placeholder="Comment" required=""></textarea>
-											<input type="submit" value="SEND">
-											<div class="clearfix"> </div>
-										</form>
-									</div>
-								</div>
-
-@helper.form(action = routes.CommentController.newCommentSubmission()) {
-  <div class="form-actions">
-     <div class="login-page-movie ">
-      <div class="form-movie ">
-      <h4 class="message">New Comment</h4><br/>
-        <form class="register-form">
-              @helper.inputText(commentForm("Message"))
-          <button>Send</button>
-        </form>
-      </div>
-    </div>
-  </div>
- }
-
-@helper.form(action = routes.RatingController.newRatingSubmission()) {
-  <div class="form-actions">
-     <div class="login-page-movie ">
-      <div class="form-movie ">
-      <h4 class="message">New Rating</h4><br/>
-        <form class="register-form">
-              @helper.inputText(ratingForm("Stars"))
-          <button>Send</button>
-        </form>
-      </div>
-    </div>
-  </div>
- }
-
-
-
-					</div>
-
-				</div>
-</div>
-
-
-
-<div class="my-rating"></div>
 
 
 

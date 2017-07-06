@@ -22,6 +22,9 @@ GET     /login                     controllers.AuthController.login
 POST    /login                     controllers.AuthController.authenticate
 GET     /logout                    controllers.AuthController.logout
 
+
+
+GET     /comment                   controllers.MovieController.list
 POST    /comment                   controllers.CommentController.newCommentSubmission
 
 POST    /rating                    controllers.RatingController.newRatingSubmission
