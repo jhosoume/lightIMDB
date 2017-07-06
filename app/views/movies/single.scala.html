@@ -1,11 +1,8 @@
 @* listagem Template File *@
-@(movie: Option[Movie], commentForm: Form[CommentVO], ratingForm: Form[RatingVO])(implicit messages: Messages)
+@(movie: Option[Movie], commentForm: Form[CommentVO], ratingForm: Form[RatingVO], comments: List[Comment], avgrating: Double)(implicit messages: Messages)
 
 
 @main("IMDB") {
-
-
-
 
 <div class="container">
 				<div class="intro2 col-sm-12">
@@ -16,17 +13,23 @@
 						<h1><a>@movie.get.title<a>(@movie.get.productionYear)</a></a></h1>
 						<h5><a>@movie.get.director</a></h5>	
 
-
-
-							<div>	
+<div>	
 								<div class=" img-pad col-sm-4">
 									<a href= "/movie/@movie.get.id" class="hvr-shutter-out-horizontal"><img src="../assets/images/imgf/(@movie.get.id).jpg" title="album-name" class="img-responsive" alt=" " />
 									</a>
 									<div>
-										<h1 class="text-rating">5</h1>
+										<h1 class="text-rating">@avgrating</h1>
 										<a href=><img src="../assets/images/star.png" class="img-responsive star"/></a>
 									</div>
+									@helper.form(action = routes.RatingController.newRatingSubmission()) {
+									<div class="form-movie-star">
+									    @helper.inputText(ratingForm("Stars"))
+								      	<button>Send</button>
+								      	<div class="clearfix"> </div>
+								    </div>
+								    }
 								</div>
+
 
 								<div class="col-sm-8 media-grids">
 									<h3>Comments</h3>

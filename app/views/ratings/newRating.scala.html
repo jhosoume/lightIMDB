@@ -16,3 +16,8 @@
   </div>
  }
 }
+		<div>
+			@helper.form(action = routes.RatingController.newRatingSubmission()) {
+		    @helper.inputText(ratingForm("Stars"))
+	      	<button>Send</button>}
+	     </div>

@@ -4,6 +4,8 @@ import play.api.mvc._
 import models.Movie
 import models.MovieDAO
 import models.UserDAO
+import models.RatingDAO
+import models.CommentDAO
 import javax.inject.Inject
 import play.api.data._
 import play.api.data.Forms._
@@ -15,7 +17,7 @@ import controllers.CommentVO
 import controllers.RatingVO
 
 /**
- * A classe que processa as requisicoes do usuario 
+ * A classe que processa as requisicoes do usuario , cda
  * relacionadas a filmes e interage com o meio de 
  * persitencia. 
  * 
@@ -23,7 +25,7 @@ import controllers.RatingVO
  * PlayFramework para ter acesso ao DAO FilmeDAO.  
  */
 @Singleton
-class MovieController @Inject()(override val dao: UserDAO, mdao: MovieDAO, val messagesApi: MessagesApi) extends Controller with Secured with I18nSupport {
+class MovieController @Inject()(override val dao: UserDAO, mdao: MovieDAO, ratingdao: RatingDAO, commentdao: CommentDAO, val messagesApi: MessagesApi, cdao: CommentDAO, rdao: RatingDAO) extends Controller with Secured with I18nSupport {
   
   def list = Action {
     var movies = mdao.list
@@ -36,8 +38,10 @@ class MovieController @Inject()(override val dao: UserDAO, mdao: MovieDAO, val m
   }
 
   def show(id: Int) = withAuth { username => implicit request =>
-    println(request.session.get(Security.username))
-    Ok(views.html.movies.single((mdao.findById(id)), commentForm, ratingForm)).withCookies(Cookie("movie", s"$id"))
+    val avgRating = ratingdao.avgByMovie(id)
+    val comments = commentdao.findByMovie(id)
+    println(comments)
+    Ok(views.html.movies.single((mdao.findById(id)), commentForm, ratingForm, comments, avgRating)).withCookies(Cookie("movie", s"$id"))
   }
   
   def newMovie = withAuth { username => implicit request =>

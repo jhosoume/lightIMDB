@@ -18,14 +18,14 @@ import javax.inject.Singleton
  * banco de dados. 
  */
 case class Rating(id: Int, stars: Float, user_id: Int, movie_id: Int) 
-case class averageMovie(id: Int, avg_stars: Float, user_id: Int, movie_id: Int)
+case class AverageMovie(avg_stars: Double, movie_id: Int)
 
 /**
  * Um DAO para a classe de entidade Filme. 
  */
 class RatingDAO @Inject() (database: Database){
   val parser : RowParser[models.Rating] = Macro.namedParser[models.Rating]
-  val avgParser : RowParser[models.averageMovie] = Macro.namedParser[models.averageMovie]
+  val avgParser : RowParser[models.AverageMovie] = Macro.namedParser[models.AverageMovie]
   
   def save(rating: Rating) = database.withConnection { implicit connection => 
     val id: Option[Long] = SQL(
@@ -53,7 +53,7 @@ class RatingDAO @Inject() (database: Database){
   def findByUser(user_id: Int) = database.withConnection { implicit connection =>
     SQL("""SELECT RATE.ID AS id, RATE.STARS AS stars, RATE.USERID AS user_id, MOVIEID AS movie_id
            FROM TB_RATING AS RATE
-           INNER JOIN  TB_MOVIE MOVIE ON MOVIE.ID == movie_id
+           INNER JOIN  TB_MOVIE MOVIE ON MOVIE.ID = movie_id
            WHERE RATE.USERID = {user_id}""")
     .on('user_id -> user_id).as(parser.*)
   }
@@ -61,17 +61,18 @@ class RatingDAO @Inject() (database: Database){
   def findByMovie(movie_id: Int) = database.withConnection { implicit connection =>
     SQL("""SELECT RATE.ID AS id, RATE.STARS AS stars, RATE.USERID AS user_id, RATE.MOVIEID AS movie_id
            FROM TB_RATING AS RATE
-           INNER JOIN  TB_MOVIE MOVIE ON MOVIE.ID == movie_id
+           INNER JOIN  TB_MOVIE MOVIE ON MOVIE.ID = movie_id
            WHERE RATE.MOVIEID = {movie_id}""")
     .on('movie_id -> movie_id).as(parser.*)
   }
 
   def avgByMovie(movie_id: Int)  = database.withConnection { implicit connection =>
-    SQL("""SELECT RATE.ID AS id, AVG(RATE.STARS) AS avg_stars, RATE.USERID AS user_id, RATE.MOVIEID AS movie_id
-           FROM TB_RATING AS RATE
-           INNER JOIN TB_MOVIE MOVIE ON MOVIE.ID == movie_id
-           WHERE RATE.MOVIEID = {movie_id}""")
-    .on('movie_id -> movie_id).as(avgParser.*)
+    SQL(""" SELECT AVG(RATE.STARS) AS avg_stars, RATE.MOVIEID AS movie_id 
+      FROM TB_RATING RATE 
+      INNER JOIN TB_MOVIE MOVIE ON RATE.MOVIEID = MOVIE.ID 
+      WHERE RATE.MOVIEID = {movie_id} 
+      GROUP BY(RATE.MOVIEID)""")
+      .on('movie_id -> movie_id).as(avgParser.singleOpt).getOrElse(AverageMovie(0, 1)).avg_stars
   }
 
   //def searchByRating(rate: Int) = database.withConnection { implicit connection =>

@@ -6,6 +6,7 @@ import models.MovieDAO
 import models.UserDAO
 import models.Comment
 import models.CommentDAO
+import models.RatingDAO
 import javax.inject.Inject
 import play.api.data._
 import play.api.data.Forms._
@@ -23,7 +24,7 @@ import controllers.Secured
  * PlayFramework para ter acesso ao DAO FilmeDAO.  
  */
 @Singleton
-class CommentController @Inject()(override val dao: UserDAO, moviedao: MovieDAO,commentdao: CommentDAO, val messagesApi: MessagesApi) extends Controller with Secured with I18nSupport {
+class CommentController @Inject()(override val dao: UserDAO, moviedao: MovieDAO, commentdao: CommentDAO, ratingdao: RatingDAO, val messagesApi: MessagesApi) extends Controller with Secured with I18nSupport {
   
   def list = Action {
     Ok(views.html.comments.listing(commentdao.list))
@@ -47,8 +48,10 @@ class CommentController @Inject()(override val dao: UserDAO, moviedao: MovieDAO,
         val user = dao.searchByEmail(user_email).get
         val movie_id =  request.cookies.get("movie").get.value.toInt
         val newComment = Comment(0, comment.message, user.id, movie_id)
+        val avgRating = ratingdao.avgByMovie(movie_id)
+        val comments = commentdao.findByMovie(movie_id)
         commentdao.save(newComment)
-        Created(views.html.movies.single((moviedao.findById(movie_id)), commentForm, ratingForm)).withCookies(Cookie("movie", s"$movie_id"))
+        Created(views.html.movies.single((moviedao.findById(movie_id)), commentForm, ratingForm,comments, avgRating)).withCookies(Cookie("movie", s"$movie_id"))
       }
     )
   }
