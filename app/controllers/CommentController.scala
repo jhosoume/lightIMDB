@@ -44,11 +44,11 @@ class CommentController @Inject()(override val dao: UserDAO, moviedao: MovieDAO,
       },
       comment => {
         val user_email = request.session.get(Security.username).get
-        val movie_id =  request.cookies.get("movie")
-        println(movie_id)
-        //val newComment = Comment(0, comment.message, dao.searchByEmail(user_email), movie_id)
-        //commentdao.save(newComment)
-        Created(views.html.index())
+        val user = dao.searchByEmail(user_email).get
+        val movie_id =  request.cookies.get("movie").get.value.toInt
+        val newComment = Comment(0, comment.message, user.id, movie_id)
+        commentdao.save(newComment)
+        Created(views.html.movies.single((moviedao.findById(movie_id)), commentForm)).withCookies(Cookie("movie", s"$movie_id"))
       }
     )
   }

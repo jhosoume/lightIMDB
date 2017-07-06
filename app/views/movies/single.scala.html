@@ -1,5 +1,6 @@
 @* listagem Template File *@
-@(movie: Option[Movie], commentForm: Form[CommentVO]))
+@(movie: Option[Movie], commentForm: Form[CommentVO])(implicit messages: Messages)
+
 
 @main("IMDB") {
 
@@ -48,6 +49,20 @@
 										</form>
 									</div>
 								</div>
+
+@helper.form(action = routes.CommentController.newCommentSubmission()) {
+  <div class="form-actions">
+     <div class="login-page-movie ">
+      <div class="form-movie ">
+      <h4 class="message">New Comment</h4><br/>
+        <form class="register-form">
+              @helper.inputText(commentForm("Message"))
+          <button>Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+ }
 
 
 
